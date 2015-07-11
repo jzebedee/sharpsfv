@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace sharpsfv
@@ -43,6 +44,16 @@ namespace sharpsfv
                 crc.Update(buffer, 0, bytesRead);
 
             _entries.Add(key, crc.Value);
+        }
+        
+        public string ToOutput()
+        {
+            var sb = new StringBuilder();
+            
+            foreach(var entry in Entries)
+                sb.Append(entry.Key).Append(' ').Append(entry.Value);
+
+            return sb.ToString();
         }
 
         public IReadOnlyDictionary<string, uint> Entries
