@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharpSfv.Crc32
+﻿namespace SharpSfv.Crc32
 {
     internal static class Crc32Table
     {
