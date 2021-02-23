@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Crc32.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Crc32\Crc32Hash.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Memory" Version="4.5.4" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
     <PackageReference Include="System.Memory" Version="4.5.4" Condition="'$(TargetFramework)' == 'netstandard1.3'" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" Condition="'$(TargetFramework)' == 'netstandard1.3'" />
