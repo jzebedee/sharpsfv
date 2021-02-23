@@ -6,6 +6,10 @@ namespace SharpSfv.Crc32
 {
     internal static class ChecksumHelper
     {
+        private const int SmallBufferSize = 0x1000;
+        private const int LargeBufferThreshold = 0x10000;
+        private const int LargeBufferSize = 0x10000;
+
         public static uint FromStream(Stream stream)
         {
             if (!stream.CanRead)
@@ -14,7 +18,7 @@ namespace SharpSfv.Crc32
             var crc = new Crc32Hash();
 
             var length = stream.Length;
-            int initialSize = length == 0 ? 0x1000 : length > int.MaxValue ? 0x10000 : (int)length;
+            int initialSize = length == 0 ? SmallBufferSize : length > LargeBufferThreshold ? LargeBufferSize : (int)length;
 
             byte[] buffer = ArrayPool<byte>.Shared.Rent(initialSize);
             try
