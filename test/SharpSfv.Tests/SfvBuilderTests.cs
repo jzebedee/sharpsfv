@@ -24,6 +24,7 @@ namespace SharpSfv.Tests
             {
                 //should default to UTF8
                 yield return new object[] { null };
+                yield return new object[] { Encoding.UTF8 };
                 yield return new object[] { Encoding.ASCII };
 
             }
