@@ -29,6 +29,14 @@ namespace SharpSfv
             _stream.Write(lineBytes, 0, lineBytes.Length);
         }
 
+        public void AddComment(string comment)
+        {
+            var lineBytes = _encoding.GetBytes($"; {comment}{Environment.NewLine}");
+            _stream.Write(lineBytes, 0, lineBytes.Length);
+        }
+
+        public void AddEntry(string key, uint crc32) => WriteLine(key, crc32);
+
         public void AddStream(string key, Stream stream) => WriteLine(key, ChecksumHelper.FromStream(stream));
 
         public void AddFile(string path) => WriteLine(Path.GetFileName(path), ChecksumHelper.FromFile(path));

@@ -51,13 +51,21 @@ namespace SharpSfv.Tests
             const string key = "Þórsteinn";
             var outputStream = new MemoryStream();
 
+            const string comment = "Hello, world!";
             var builder = GetBuilder(outputStream, encoding);
-            encoding = encoding ?? Encoding.UTF8;
-
+            builder.AddComment(comment);
+            
             var randomBuffer = GetRandomBuffer(0x1000);
             builder.AddStream(key, new MemoryStream(randomBuffer));
 
-            var expected = encoding.GetBytes($"{key} {(new Crc32Hash().Compute(randomBuffer)):X8}{Environment.NewLine}");
+            const string dummyKey = "dummy.file";
+            const uint dummyCrc = 0xDEADBEEF;
+            builder.AddEntry(dummyKey, dummyCrc);
+
+            encoding = encoding ?? Encoding.UTF8;
+            var expected = encoding.GetBytes($"; {comment}{Environment.NewLine}"
+                + $"{key} {(new Crc32Hash().Compute(randomBuffer)):X8}{Environment.NewLine}"
+                + $"{dummyKey} {dummyCrc:X8}{Environment.NewLine}");
             var actual = outputStream.ToArray();
             Assert.Equal(expected, actual);
         }
