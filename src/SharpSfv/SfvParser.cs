@@ -82,6 +82,8 @@ namespace SharpSfv
         private static readonly byte[] LineEndings = Environment.NewLine.ToUtf8();
 
         private readonly List<SfvLine> _entries = new List<SfvLine>();
+        
+        public IReadOnlyList<SfvLine> Entries => _entries;
 
         public void ParseLine(string line) => ParseLine(line.ToUtf8());
 
