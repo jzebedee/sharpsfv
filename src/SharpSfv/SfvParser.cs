@@ -64,6 +64,11 @@ namespace SharpSfv
                 utf8Buffer = utf8Buffer.Slice(i + 1);
             }
 
+            if(!utf8Buffer.IsEmpty)
+            {
+                parser.ParseLine(utf8Buffer);
+            }
+
             return parser;
         }
 
